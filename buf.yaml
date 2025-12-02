@@ -1,0 +1,8 @@
+version: v2
+
+deps:
+  - buf.build/google/protobuf
+
+modules:
+  - path: proto
+    name: buf.build/nemo1105/genkit-tool-options
