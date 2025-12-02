@@ -20,18 +20,16 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version-file: go.mod
+      - name: Install buf CLI
+        uses: bufbuild/buf-action@v1
+        with:
+          setup_only: true
       - name: Go test
         run: go test ./...
       - name: Buf lint
-        uses: bufbuild/buf-action@v1
-        with:
-          command: lint
-          working-directory: .
+        run: buf lint
       - name: Buf generate (sanity)
-        uses: bufbuild/buf-action@v1
-        with:
-          command: generate
-          working-directory: .
+        run: buf generate
 
   push-bsr:
     needs: test
@@ -42,9 +40,11 @@ jobs:
         working-directory: .
     steps:
       - uses: actions/checkout@v4
-      - name: Buf push
+      - name: Install buf CLI
         uses: bufbuild/buf-action@v1
         with:
-          command: push
-          buf_token: ${{ secrets.BUF_TOKEN }}
-          working-directory: .
+          setup_only: true
+      - name: Buf push
+        env:
+          BUF_TOKEN: ${{ secrets.BUF_TOKEN }}
+        run: buf push
