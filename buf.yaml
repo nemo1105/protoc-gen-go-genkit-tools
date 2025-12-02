@@ -5,4 +5,4 @@ deps:
 
 modules:
   - path: proto
-    name: buf.build/nemo1105/genkit-tool-options
+    name: buf.build/nemo/genkit-tool-options
