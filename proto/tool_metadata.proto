@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package genkit.tool;
+
+option go_package = "github.com/nemo1105/protoc-gen-go-genkit-tools/internal/gen;tool";
+
+import "google/protobuf/descriptor.proto";
+
+// Custom option: metadata for tools to aid code/document generation.
+message ToolDoc {
+  string name = 1;               // Tool name (overrides RPC name)
+  string desc = 2;               // Tool description
+  repeated string tags = 3;      // Tags, e.g. "demo" or "safety"
+  string input = 4;              // Input description
+  string output = 5;             // Output description
+}
+
+// Custom option: extra documentation for fields.
+message ToolFieldDoc {
+  string desc = 1;      // Field description
+  string example = 2;   // Example value
+  bool required = 3;    // Mark as required in generated JSON Schema
+}
+
+// RPC-level option describing a tool.
+extend google.protobuf.MethodOptions {
+  ToolDoc tool_doc = 50001;
+}
+
+// Field-level option describing parameters or result fields.
+extend google.protobuf.FieldOptions {
+  ToolFieldDoc field_doc = 50002;
+}

@@ -1,0 +1,50 @@
+name: protoc-gen-go-genkit-tools
+
+on:
+  push:
+    branches: ["**"]
+    tags: ["v*"]
+  pull_request:
+    paths:
+      - "**"
+      - ".github/workflows/build.yml"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: .
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+      - name: Go test
+        run: go test ./...
+      - name: Buf lint
+        uses: bufbuild/buf-action@v2
+        with:
+          command: lint
+          working-directory: .
+      - name: Buf generate (sanity)
+        uses: bufbuild/buf-action@v2
+        with:
+          command: generate
+          working-directory: .
+
+  push-bsr:
+    needs: test
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: .
+    steps:
+      - uses: actions/checkout@v4
+      - name: Buf push
+        uses: bufbuild/buf-action@v2
+        with:
+          command: push
+          buf_token: ${{ secrets.BUF_TOKEN }}
+          working-directory: .
