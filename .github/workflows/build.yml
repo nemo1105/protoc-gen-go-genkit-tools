@@ -23,12 +23,12 @@ jobs:
       - name: Go test
         run: go test ./...
       - name: Buf lint
-        uses: bufbuild/buf-action@v2
+        uses: bufbuild/buf-action@v1
         with:
           command: lint
           working-directory: .
       - name: Buf generate (sanity)
-        uses: bufbuild/buf-action@v2
+        uses: bufbuild/buf-action@v1
         with:
           command: generate
           working-directory: .
@@ -43,7 +43,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Buf push
-        uses: bufbuild/buf-action@v2
+        uses: bufbuild/buf-action@v1
         with:
           command: push
           buf_token: ${{ secrets.BUF_TOKEN }}
