@@ -51,7 +51,7 @@ Protoc/Buf plugin that turns proto methods annotated with AI tool options into G
        out: .
        opt: paths=source_relative
    inputs:
-     - module: buf.build/nemo/genkit-tool-options
+     - module: buf.build/genkit/tool-options
      - directory: .
    ```
    Then `buf generate`.
@@ -77,5 +77,5 @@ Protoc/Buf plugin that turns proto methods annotated with AI tool options into G
   - On tag: same tests + `buf push` to BSR using `BUF_TOKEN` secret.
 
 ## Notes
-- BSR module is declared in `buf.yaml` as `buf.build/nemo/genkit-tool-options`; adjust to your org before publishing.
+- BSR module is declared in `buf.yaml` as `buf.build/genkit/tool-options`; adjust to your org before publishing.
 - Generated code (`internal/gen`) is committed to avoid requiring `protoc` at build time.
