@@ -6,7 +6,7 @@ import (
 	"strconv"
 	"strings"
 
-	pb "github.com/nemo1105/protoc-gen-go-genkit-tools/internal/gen"
+	pb "github.com/nemo1105/protoc-gen-go-genkit-tools/internal/gen/genkit/tool/v1"
 	"google.golang.org/protobuf/compiler/protogen"
 	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/reflect/protoreflect"

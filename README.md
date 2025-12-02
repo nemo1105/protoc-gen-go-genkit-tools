@@ -11,7 +11,7 @@ Protoc/Buf plugin that turns proto methods annotated with AI tool options into G
 - Works directly with `genkitai.WithTools(...)` via `ToolRef` helpers.
 
 ## Layout
-- `proto/tool_metadata.proto`: custom options `(genkit.tool.tool_doc)` and `(genkit.tool.field_doc)`.
+- `proto/genkit/tool/v1/tool_metadata.proto`: custom options `(genkit.tool.v1.tool_doc)` and `(genkit.tool.v1.field_doc)`.
 - `buf.yaml` / `buf.gen.yaml`: Buf module + codegen config (Go stubs into `internal/gen`).
 - `main.go`: plugin implementation.
 
@@ -25,17 +25,17 @@ Protoc/Buf plugin that turns proto methods annotated with AI tool options into G
 
 2) Annotate your proto RPCs with options:
    ```proto
-   import "tool_metadata.proto";
+   import "genkit/tool/v1/tool_metadata.proto";
 
    service ToolCatalog {
      rpc GetWeather(GetWeatherRequest) returns (GetWeatherResponse) {
-       option (genkit.tool.tool_doc) = { name: "get_weather" description: "Fetch weather" };
+       option (genkit.tool.v1.tool_doc) = { name: "get_weather" description: "Fetch weather" };
      }
    }
 
    message GetWeatherRequest {
-     string city = 1 [(genkit.tool.field_doc) = { desc: "City name" required: true }];
-     string units = 2 [(genkit.tool.field_doc) = { desc: "Units: metric|imperial" example: "metric" }];
+     string city = 1 [(genkit.tool.v1.field_doc) = { desc: "City name" required: true }];
+     string units = 2 [(genkit.tool.v1.field_doc) = { desc: "Units: metric|imperial" example: "metric" }];
    }
 
    message GetWeatherResponse {

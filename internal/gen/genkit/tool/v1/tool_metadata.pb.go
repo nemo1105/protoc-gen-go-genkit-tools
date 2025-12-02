@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.36.10
 // 	protoc        (unknown)
-// source: tool_metadata.proto
+// source: genkit/tool/v1/tool_metadata.proto
 
 package tool
 
@@ -36,7 +36,7 @@ type ToolDoc struct {
 
 func (x *ToolDoc) Reset() {
 	*x = ToolDoc{}
-	mi := &file_tool_metadata_proto_msgTypes[0]
+	mi := &file_genkit_tool_v1_tool_metadata_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -48,7 +48,7 @@ func (x *ToolDoc) String() string {
 func (*ToolDoc) ProtoMessage() {}
 
 func (x *ToolDoc) ProtoReflect() protoreflect.Message {
-	mi := &file_tool_metadata_proto_msgTypes[0]
+	mi := &file_genkit_tool_v1_tool_metadata_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -61,7 +61,7 @@ func (x *ToolDoc) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ToolDoc.ProtoReflect.Descriptor instead.
 func (*ToolDoc) Descriptor() ([]byte, []int) {
-	return file_tool_metadata_proto_rawDescGZIP(), []int{0}
+	return file_genkit_tool_v1_tool_metadata_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *ToolDoc) GetName() string {
@@ -111,7 +111,7 @@ type ToolFieldDoc struct {
 
 func (x *ToolFieldDoc) Reset() {
 	*x = ToolFieldDoc{}
-	mi := &file_tool_metadata_proto_msgTypes[1]
+	mi := &file_genkit_tool_v1_tool_metadata_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -123,7 +123,7 @@ func (x *ToolFieldDoc) String() string {
 func (*ToolFieldDoc) ProtoMessage() {}
 
 func (x *ToolFieldDoc) ProtoReflect() protoreflect.Message {
-	mi := &file_tool_metadata_proto_msgTypes[1]
+	mi := &file_genkit_tool_v1_tool_metadata_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -136,7 +136,7 @@ func (x *ToolFieldDoc) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ToolFieldDoc.ProtoReflect.Descriptor instead.
 func (*ToolFieldDoc) Descriptor() ([]byte, []int) {
-	return file_tool_metadata_proto_rawDescGZIP(), []int{1}
+	return file_genkit_tool_v1_tool_metadata_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *ToolFieldDoc) GetDesc() string {
@@ -160,42 +160,42 @@ func (x *ToolFieldDoc) GetRequired() bool {
 	return false
 }
 
-var file_tool_metadata_proto_extTypes = []protoimpl.ExtensionInfo{
+var file_genkit_tool_v1_tool_metadata_proto_extTypes = []protoimpl.ExtensionInfo{
 	{
 		ExtendedType:  (*descriptorpb.MethodOptions)(nil),
 		ExtensionType: (*ToolDoc)(nil),
 		Field:         50001,
-		Name:          "genkit.tool.tool_doc",
+		Name:          "genkit.tool.v1.tool_doc",
 		Tag:           "bytes,50001,opt,name=tool_doc",
-		Filename:      "tool_metadata.proto",
+		Filename:      "genkit/tool/v1/tool_metadata.proto",
 	},
 	{
 		ExtendedType:  (*descriptorpb.FieldOptions)(nil),
 		ExtensionType: (*ToolFieldDoc)(nil),
 		Field:         50002,
-		Name:          "genkit.tool.field_doc",
+		Name:          "genkit.tool.v1.field_doc",
 		Tag:           "bytes,50002,opt,name=field_doc",
-		Filename:      "tool_metadata.proto",
+		Filename:      "genkit/tool/v1/tool_metadata.proto",
 	},
 }
 
 // Extension fields to descriptorpb.MethodOptions.
 var (
-	// optional genkit.tool.ToolDoc tool_doc = 50001;
-	E_ToolDoc = &file_tool_metadata_proto_extTypes[0]
+	// optional genkit.tool.v1.ToolDoc tool_doc = 50001;
+	E_ToolDoc = &file_genkit_tool_v1_tool_metadata_proto_extTypes[0]
 )
 
 // Extension fields to descriptorpb.FieldOptions.
 var (
-	// optional genkit.tool.ToolFieldDoc field_doc = 50002;
-	E_FieldDoc = &file_tool_metadata_proto_extTypes[1]
+	// optional genkit.tool.v1.ToolFieldDoc field_doc = 50002;
+	E_FieldDoc = &file_genkit_tool_v1_tool_metadata_proto_extTypes[1]
 )
 
-var File_tool_metadata_proto protoreflect.FileDescriptor
+var File_genkit_tool_v1_tool_metadata_proto protoreflect.FileDescriptor
 
-const file_tool_metadata_proto_rawDesc = "" +
+const file_genkit_tool_v1_tool_metadata_proto_rawDesc = "" +
 	"\n" +
-	"\x13tool_metadata.proto\x12\vgenkit.tool\x1a google/protobuf/descriptor.proto\"s\n" +
+	"\"genkit/tool/v1/tool_metadata.proto\x12\x0egenkit.tool.v1\x1a google/protobuf/descriptor.proto\"s\n" +
 	"\aToolDoc\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x12\n" +
 	"\x04desc\x18\x02 \x01(\tR\x04desc\x12\x12\n" +
@@ -205,34 +205,34 @@ const file_tool_metadata_proto_rawDesc = "" +
 	"\fToolFieldDoc\x12\x12\n" +
 	"\x04desc\x18\x01 \x01(\tR\x04desc\x12\x18\n" +
 	"\aexample\x18\x02 \x01(\tR\aexample\x12\x1a\n" +
-	"\brequired\x18\x03 \x01(\bR\brequired:Q\n" +
-	"\btool_doc\x12\x1e.google.protobuf.MethodOptions\x18ц\x03 \x01(\v2\x14.genkit.tool.ToolDocR\atoolDoc:W\n" +
-	"\tfield_doc\x12\x1d.google.protobuf.FieldOptions\x18҆\x03 \x01(\v2\x19.genkit.tool.ToolFieldDocR\bfieldDocBBZ@github.com/nemo1105/protoc-gen-go-genkit-tools/internal/gen;toolb\x06proto3"
+	"\brequired\x18\x03 \x01(\bR\brequired:T\n" +
+	"\btool_doc\x12\x1e.google.protobuf.MethodOptions\x18ц\x03 \x01(\v2\x17.genkit.tool.v1.ToolDocR\atoolDoc:Z\n" +
+	"\tfield_doc\x12\x1d.google.protobuf.FieldOptions\x18҆\x03 \x01(\v2\x1c.genkit.tool.v1.ToolFieldDocR\bfieldDocBBZ@github.com/nemo1105/protoc-gen-go-genkit-tools/internal/gen;toolb\x06proto3"
 
 var (
-	file_tool_metadata_proto_rawDescOnce sync.Once
-	file_tool_metadata_proto_rawDescData []byte
+	file_genkit_tool_v1_tool_metadata_proto_rawDescOnce sync.Once
+	file_genkit_tool_v1_tool_metadata_proto_rawDescData []byte
 )
 
-func file_tool_metadata_proto_rawDescGZIP() []byte {
-	file_tool_metadata_proto_rawDescOnce.Do(func() {
-		file_tool_metadata_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_tool_metadata_proto_rawDesc), len(file_tool_metadata_proto_rawDesc)))
+func file_genkit_tool_v1_tool_metadata_proto_rawDescGZIP() []byte {
+	file_genkit_tool_v1_tool_metadata_proto_rawDescOnce.Do(func() {
+		file_genkit_tool_v1_tool_metadata_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_genkit_tool_v1_tool_metadata_proto_rawDesc), len(file_genkit_tool_v1_tool_metadata_proto_rawDesc)))
 	})
-	return file_tool_metadata_proto_rawDescData
+	return file_genkit_tool_v1_tool_metadata_proto_rawDescData
 }
 
-var file_tool_metadata_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
-var file_tool_metadata_proto_goTypes = []any{
-	(*ToolDoc)(nil),                    // 0: genkit.tool.ToolDoc
-	(*ToolFieldDoc)(nil),               // 1: genkit.tool.ToolFieldDoc
+var file_genkit_tool_v1_tool_metadata_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_genkit_tool_v1_tool_metadata_proto_goTypes = []any{
+	(*ToolDoc)(nil),                    // 0: genkit.tool.v1.ToolDoc
+	(*ToolFieldDoc)(nil),               // 1: genkit.tool.v1.ToolFieldDoc
 	(*descriptorpb.MethodOptions)(nil), // 2: google.protobuf.MethodOptions
 	(*descriptorpb.FieldOptions)(nil),  // 3: google.protobuf.FieldOptions
 }
-var file_tool_metadata_proto_depIdxs = []int32{
-	2, // 0: genkit.tool.tool_doc:extendee -> google.protobuf.MethodOptions
-	3, // 1: genkit.tool.field_doc:extendee -> google.protobuf.FieldOptions
-	0, // 2: genkit.tool.tool_doc:type_name -> genkit.tool.ToolDoc
-	1, // 3: genkit.tool.field_doc:type_name -> genkit.tool.ToolFieldDoc
+var file_genkit_tool_v1_tool_metadata_proto_depIdxs = []int32{
+	2, // 0: genkit.tool.v1.tool_doc:extendee -> google.protobuf.MethodOptions
+	3, // 1: genkit.tool.v1.field_doc:extendee -> google.protobuf.FieldOptions
+	0, // 2: genkit.tool.v1.tool_doc:type_name -> genkit.tool.v1.ToolDoc
+	1, // 3: genkit.tool.v1.field_doc:type_name -> genkit.tool.v1.ToolFieldDoc
 	4, // [4:4] is the sub-list for method output_type
 	4, // [4:4] is the sub-list for method input_type
 	2, // [2:4] is the sub-list for extension type_name
@@ -240,27 +240,27 @@ var file_tool_metadata_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for field type_name
 }
 
-func init() { file_tool_metadata_proto_init() }
-func file_tool_metadata_proto_init() {
-	if File_tool_metadata_proto != nil {
+func init() { file_genkit_tool_v1_tool_metadata_proto_init() }
+func file_genkit_tool_v1_tool_metadata_proto_init() {
+	if File_genkit_tool_v1_tool_metadata_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_tool_metadata_proto_rawDesc), len(file_tool_metadata_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_genkit_tool_v1_tool_metadata_proto_rawDesc), len(file_genkit_tool_v1_tool_metadata_proto_rawDesc)),
 			NumEnums:      0,
 			NumMessages:   2,
 			NumExtensions: 2,
 			NumServices:   0,
 		},
-		GoTypes:           file_tool_metadata_proto_goTypes,
-		DependencyIndexes: file_tool_metadata_proto_depIdxs,
-		MessageInfos:      file_tool_metadata_proto_msgTypes,
-		ExtensionInfos:    file_tool_metadata_proto_extTypes,
+		GoTypes:           file_genkit_tool_v1_tool_metadata_proto_goTypes,
+		DependencyIndexes: file_genkit_tool_v1_tool_metadata_proto_depIdxs,
+		MessageInfos:      file_genkit_tool_v1_tool_metadata_proto_msgTypes,
+		ExtensionInfos:    file_genkit_tool_v1_tool_metadata_proto_extTypes,
 	}.Build()
-	File_tool_metadata_proto = out.File
-	file_tool_metadata_proto_goTypes = nil
-	file_tool_metadata_proto_depIdxs = nil
+	File_genkit_tool_v1_tool_metadata_proto = out.File
+	file_genkit_tool_v1_tool_metadata_proto_goTypes = nil
+	file_genkit_tool_v1_tool_metadata_proto_depIdxs = nil
 }

@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package genkit.tool;
+package genkit.tool.v1;
 
 option go_package = "github.com/nemo1105/protoc-gen-go-genkit-tools/internal/gen;tool";
 
