@@ -1,0 +1,7 @@
+version: v2
+
+deps:
+  - buf.build/google/protobuf
+
+modules:
+  - path: test/proto

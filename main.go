@@ -251,16 +251,21 @@ func getFieldDoc(field protoreflect.FieldDescriptor) *pb.ToolFieldDoc {
 }
 
 func buildInputSchema(method protoreflect.MethodDescriptor, doc *pb.ToolDoc) map[string]any {
-	msg := method.Input()
+	schema := buildMessageSchema(method.Input())
+	if doc != nil && doc.GetInput() != "" {
+		schema["description"] = doc.GetInput()
+	}
+
+	return schema
+}
+
+func buildMessageSchema(msg protoreflect.MessageDescriptor) map[string]any {
 	props := make(map[string]any)
 	var required []string
 
 	for i := 0; i < msg.Fields().Len(); i++ {
 		field := msg.Fields().Get(i)
-
-		prop := map[string]any{
-			"type": jsonType(field.Kind()),
-		}
+		prop := buildFieldSchema(field)
 
 		if fd := getFieldDoc(field); fd != nil {
 			if fd.Desc != "" {
@@ -273,7 +278,6 @@ func buildInputSchema(method protoreflect.MethodDescriptor, doc *pb.ToolDoc) map
 				required = append(required, string(field.Name()))
 			}
 		}
-
 		props[string(field.Name())] = prop
 	}
 
@@ -281,31 +285,47 @@ func buildInputSchema(method protoreflect.MethodDescriptor, doc *pb.ToolDoc) map
 		"type":       "object",
 		"properties": props,
 	}
-	if doc != nil && doc.GetInput() != "" {
-		schema["description"] = doc.GetInput()
-	}
 	if len(required) > 0 {
 		sort.Strings(required)
 		schema["required"] = required
 	}
-
 	return schema
 }
 
-func jsonType(kind protoreflect.Kind) string {
+func buildFieldSchema(field protoreflect.FieldDescriptor) map[string]any {
+	switch {
+	case field.IsList():
+		return map[string]any{
+			"type":  "array",
+			"items": scalarOrMessageSchema(field.Kind(), field.Message()),
+		}
+	case field.IsMap():
+		mv := field.MapValue()
+		return map[string]any{
+			"type":                 "object",
+			"additionalProperties": scalarOrMessageSchema(mv.Kind(), mv.Message()),
+		}
+	default:
+		return scalarOrMessageSchema(field.Kind(), field.Message())
+	}
+}
+
+func scalarOrMessageSchema(kind protoreflect.Kind, msg protoreflect.MessageDescriptor) map[string]any {
 	switch kind {
 	case protoreflect.BoolKind:
-		return "boolean"
+		return map[string]any{"type": "boolean"}
 	case protoreflect.DoubleKind, protoreflect.FloatKind:
-		return "number"
+		return map[string]any{"type": "number"}
 	case protoreflect.Int32Kind, protoreflect.Int64Kind,
 		protoreflect.Sint32Kind, protoreflect.Sint64Kind,
 		protoreflect.Sfixed32Kind, protoreflect.Sfixed64Kind,
 		protoreflect.Uint32Kind, protoreflect.Uint64Kind,
 		protoreflect.Fixed32Kind, protoreflect.Fixed64Kind:
-		return "integer"
+		return map[string]any{"type": "integer"}
+	case protoreflect.MessageKind:
+		return buildMessageSchema(msg)
 	default:
-		return "string"
+		return map[string]any{"type": "string"}
 	}
 }
 

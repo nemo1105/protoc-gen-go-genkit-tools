@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package catalog;
+
+option go_package = "example.com/test/catalog;catalog";
+
+import "genkit/tool/v1/tool_metadata.proto";
+
+service ToolCatalog {
+  rpc GetWeather(GetWeatherRequest) returns (GetWeatherResponse) {
+    option (genkit.tool.v1.tool_doc) = {
+      name: "get_weather"
+      desc: "Fetch weather by city"
+      input: "City and optional units"
+    };
+  }
+
+  rpc Undocumented(GetWeatherRequest) returns (GetWeatherResponse) {}
+}
+
+message GetWeatherRequest {
+  string city = 1 [(genkit.tool.v1.field_doc) = { desc: "City name" required: true }];
+  string units = 2 [(genkit.tool.v1.field_doc) = { desc: "Units metric/imperial" example: "metric" }];
+}
+
+message GetWeatherResponse {
+  double temperature = 1;
+}
