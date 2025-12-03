@@ -12,16 +12,15 @@ Protoc/Buf plugin that turns proto methods annotated with AI tool options into G
 
 ## Layout
 - `proto/genkit/tool/v1/tool_metadata.proto`: custom options `(genkit.tool.v1.tool_doc)` and `(genkit.tool.v1.field_doc)`.
-- `buf.yaml` / `buf.gen.yaml`: Buf module + codegen config (Go stubs into `internal/gen`).
+- `buf.yaml` / `buf.gen.yaml`: Buf module + codegen config (Go stubs into `.`).
 - `main.go`: plugin implementation.
 
 ## Usage
-1) Install (from repo root):
+1) Install the plugin:
    ```sh
-   cd tools/protoc-gen-go-genkit-tools
-   go build -o ./bin/protoc-gen-go-genkit-tools .
+   go install github.com/nemo1105/protoc-gen-go-genkit-tools@latest
    ```
-   Ensure `./bin` (or your chosen output dir) is on `PATH`.
+   Ensure `$GOPATH/bin` (or your Go install bin dir) is on `PATH`. Alternatively, build from the repo root with `go build -o "$GOPATH/bin/protoc-gen-go-genkit-tools" .` and keep `$GOPATH/bin` on `PATH`.
 
 2) Annotate your proto RPCs with options:
    ```proto
@@ -44,17 +43,26 @@ Protoc/Buf plugin that turns proto methods annotated with AI tool options into G
    }
    ```
 
-3) Run Buf/protoc generation (example Buf snippet):
-   ```yaml
-   plugins:
-     - local: protoc-gen-go-genkit-tools
-       out: .
-       opt: paths=source_relative
-   inputs:
-     - module: buf.build/genkit/tool-options
-     - directory: .
-   ```
-   Then `buf generate`.
+3) Wire up Buf config and generate:
+   - In `buf.yaml`, add the tool options module:
+     ```yaml
+     deps:
+       - buf.build/genkit/tool-options
+     ```
+   - In `buf.gen.yaml`, register the plugin and keep the imported tool options from rewriting `go_package`:
+     ```yaml
+     plugins:
+       - local: protoc-gen-go-genkit-tools
+         out: .
+         opt: paths=source_relative
+     managed:
+       enabled: true
+       disable:
+         - file_option: go_package
+           module: buf.build/genkit/tool-options
+     ```
+   - Run `buf dep update`、`buf generate`. 
+   - With Buf/Protobuf IDE plugins installed, the `import "genkit/tool/v1/tool_metadata.proto";` line will resolve cleanly and no longer show as missing after `buf dep update`.
 
 4) Use generated helpers:
    ```go
@@ -78,4 +86,3 @@ Protoc/Buf plugin that turns proto methods annotated with AI tool options into G
 
 ## Notes
 - BSR module is declared in `buf.yaml` as `buf.build/genkit/tool-options`; adjust to your org before publishing.
-- Generated code (`internal/gen`) is committed to avoid requiring `protoc` at build time.

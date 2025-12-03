@@ -207,7 +207,7 @@ const file_genkit_tool_v1_tool_metadata_proto_rawDesc = "" +
 	"\aexample\x18\x02 \x01(\tR\aexample\x12\x1a\n" +
 	"\brequired\x18\x03 \x01(\bR\brequired:T\n" +
 	"\btool_doc\x12\x1e.google.protobuf.MethodOptions\x18ц\x03 \x01(\v2\x17.genkit.tool.v1.ToolDocR\atoolDoc:Z\n" +
-	"\tfield_doc\x12\x1d.google.protobuf.FieldOptions\x18҆\x03 \x01(\v2\x1c.genkit.tool.v1.ToolFieldDocR\bfieldDocBBZ@github.com/nemo1105/protoc-gen-go-genkit-tools/internal/gen;toolb\x06proto3"
+	"\tfield_doc\x12\x1d.google.protobuf.FieldOptions\x18҆\x03 \x01(\v2\x1c.genkit.tool.v1.ToolFieldDocR\bfieldDocBDZBgithub.com/nemo1105/protoc-gen-go-genkit-tools/genkit/tool/v1;toolb\x06proto3"
 
 var (
 	file_genkit_tool_v1_tool_metadata_proto_rawDescOnce sync.Once

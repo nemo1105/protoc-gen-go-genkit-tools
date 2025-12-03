@@ -1,8 +1,7 @@
 version: v2
-clean: true
 plugins:
   - remote: buf.build/protocolbuffers/go
-    out: internal/gen
+    out: .
     opt:
       - paths=source_relative
 inputs:
